@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 .DS_STORE
 public/js/dist/main.js
+public/css/style.css

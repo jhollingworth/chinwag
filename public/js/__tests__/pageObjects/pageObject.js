@@ -1,19 +1,22 @@
 var _ = require('lodash');
 
-module.exports = function PageObject(prop) {
+module.exports = function PageObject(props, defaultProps) {
     var TestUtils = require('react/addons').addons.TestUtils;
+    var po = _.extend({}, defaultProps, props);
+    var component = po.component;
 
-    if(!prop.component) {
+    if(!component) {
         throw new Error('component required');
     }
 
-    TestUtils.renderIntoDocument(prop.component);
-    Object.keys(prop.elements).forEach(resolveProp);
+    TestUtils.renderIntoDocument(component);
 
-    prop.setText = setText;
-    prop.click = click;
+    po.setText = setText;
+    po.click = click;
 
-    return prop;
+    component.refs && Object.keys(component.refs).forEach(resolveRef, this);
+
+    return po;
 
     function setText(element, text) {
         TestUtils.Simulate.change(element, { 
@@ -27,22 +30,11 @@ module.exports = function PageObject(prop) {
         TestUtils.Simulate.click(element);
     }
 
-    function resolveProp(name) {
-        var selector = prop.elements[name];
+    function resolveRef(name) {
+        var ref = component.refs[name];
 
-        Object.defineProperty(prop, name, { get: get });
-
-        function get() {
-            var el;
-
-            if(selector.indexOf('.') === 0) {
-                el = TestUtils.findRenderedDOMComponentWithClass(prop.component, selector.substring(1));
-            } else {
-                el = TestUtils.findRenderedDOMComponentWithTag(prop.component, selector);
-            }
-
-            return el.getDOMNode();
-        }
-
+        Object.defineProperty(po, name, { 
+            get: function() { return ref.getDOMNode(); } 
+        });
     }
 }

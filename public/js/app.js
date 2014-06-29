@@ -6,13 +6,11 @@ var ChatPage = require('./chat');
 var LoginPage = require('./login');
 
 var App = React.createClass({
-
   getInitialState: function() {
       return {
           hasSession: !!SessionStore.get()
       };
   },
-
   componentDidMount: function() {
       SessionStore.addChangeListener(this._onSessionChange);
   },

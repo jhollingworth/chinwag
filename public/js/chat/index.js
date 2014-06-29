@@ -20,13 +20,9 @@ var ChatPage = React.createClass({
   render: function() {
   	return (
         <div className="chat">
-            <div className="row">
-                <Messages />
-                <UserList />
-            </div>
-            <div className="row">
-                <NewMessage />
-            </div>
+            <Messages />
+            <UserList />
+            <NewMessage />
         </div>
     );
   }
