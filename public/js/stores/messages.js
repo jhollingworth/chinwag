@@ -40,8 +40,10 @@ AppDispatcher.register(function(payload) {
       case Constants.SEND_MESSAGE:
           addMessage(action.text, action.from);
           break;
+      case Constants.SOW:
       case Constants.SYNC_MESSAGES:
           updateMessages(action.messages);
+          break;
       default:
           return true;
   }

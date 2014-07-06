@@ -38,11 +38,20 @@ var state = {
     messages: {}
 };
 
+function sow() {
+    return {
+        users: state.users,
+        messages: _.values(state.messages)
+    }
+}
+
 io.on('connection', function(socket){
+    
+    socket.emit('sow', sow());
+
     socket.on('sync:messages', function(messages) {
-        console.log('sync messages', messages)
         _.each(messages, syncMessage);
-        socket.emit('messages', messages);
+        io.emit('sync:messages', messages);
 
         function syncMessage(message) {
             var id = message.id; 

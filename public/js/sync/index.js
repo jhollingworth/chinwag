@@ -5,7 +5,7 @@ var Messages = require('../stores/messages');
 var socket = require('socket.io-client')(); 
 
 socket.on('sow', onSOW);
-socket.on('messages', onSyncMessages);
+socket.on('sync:messages', onSyncMessages);
 Messages.addChangeListener(onMessagesChanged);
 
 function onMessagesChanged() {
@@ -24,14 +24,15 @@ function onMessagesChanged() {
 
 function onSyncMessages(messages) {
   Dispatcher.handleServerAction({
-    actionType: Contants.SYNC_MESSAGES,
+    actionType: Constants.SYNC_MESSAGES,
     messages: messages
   });
 }
 
 function onSOW(sow) {
   Dispatcher.handleServerAction({
-    actionType: Contants.SOW,
-    sow: sow
+    actionType: Constants.SOW,
+    messages: sow.messages,
+    users: sow.users
   });
 }
