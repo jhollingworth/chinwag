@@ -3,7 +3,7 @@ var AppDispatcher = require('../dispatcher');
 var Constants = require('../constants');
 var Store = require('./store');
 
-var session;
+var session = localStorage.getItem('session');
 
 var SessionStore = Store.create({
     get: function() {
@@ -17,6 +17,8 @@ function setSession(name, email) {
             name: name, 
             email: email
         };
+
+        localStorage.setItem('session', session);
     }
 }
 

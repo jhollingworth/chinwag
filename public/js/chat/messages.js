@@ -1,22 +1,39 @@
-/** @jsx React.DOM */ 
+/** @jsx React.DOM */
 
 var React = require('react');
+var MessagesStore = require('../stores/messages');
 
-var NewMessage = React.createClass({
+var Messages = React.createClass({
 
   getInitialState: function() {
-      return {};
+    return {
+    	messages: []
+    };
   },
 
   componentDidMount: function() {
+    MessagesStore.addChangeListener(this._onMessagesChanged);
   },
 
   componentWillUnmount: function() {
+    MessagesStore.removeChangeListener(this._onMessagesChanged);
+  },
+
+  _onMessagesChanged: function() {
+  	this.setState({
+  		messages: MessagesStore.getAll()
+  	});
   },
 
   render: function() {
-  	return (<div/>);
+    return ( 
+    	<ul> 
+    		{this.state.messages.map(function(message) {
+    			return <li>{message.text}</li>
+    		})}
+    	</ul> 
+  	);
   }
 });
 
-module.exports = NewMessage;
+module.exports = Messages;

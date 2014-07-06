@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "gulp"
   },
   "dependencies": {
-    "express": "~4.2.0",
     "static-favicon": "~1.0.0",
     "morgan": "~1.0.0",
     "cookie-parser": "~1.0.1",
@@ -22,8 +21,12 @@
     "lodash": "^2.4.1",
     "react-addons": "^0.9.0",
     "react-tools": "*",
-    "twitter-bootstrap": "^2.1.1",
-    "socket.io": "^1.0.6"
+    "node-uuid": "^1.4.1",
+    "express": "4.3.1",
+    "socket.io": "1.0.2",
+    "socket.io-client": "^1.0.6",
+    "bootstrap": "^3.2.0",
+    "ramda": "^0.2.2"
   },
   "devDependencies": {
     "gulp": "^3.8.5",

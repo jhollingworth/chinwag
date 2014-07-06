@@ -3,9 +3,9 @@ var Dispatcher = require('../dispatcher');
 var SessionStore = require('../stores/session');
 
 var ChatActions = {
-	sendMessage: function(message) {
+	sendMessage: function(text) {
 		Dispatcher.handleViewAction({
-			message: message, 
+			text: text, 
 			from: SessionStore.get(),
 			actionType: Constants.SEND_MESSAGE
 		});

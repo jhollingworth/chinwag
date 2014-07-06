@@ -21,7 +21,7 @@ var NewMessage = React.createClass({
             <button ref="submit"
                     type="button" 
                     onClick={this._onSubmit}
-                    className="btn btn-primary" />
+                    className="btn btn-primary">Send</button>
         </div>
     );
   },

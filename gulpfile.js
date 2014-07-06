@@ -8,7 +8,7 @@ var source = require('vinyl-source-stream');
 
 gulp.task('serve', function() {
     var options = {
-        script: 'bin/www',
+        script: 'app.js',
         ext: 'html js',
         ignore: ['public/*'] 
     };
